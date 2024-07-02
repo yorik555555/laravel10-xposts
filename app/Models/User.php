@@ -56,7 +56,7 @@ class User extends Authenticatable
      */
     public function loadRelationshipCounts()
     {
-        $this->loadCount(['xposts', 'followings', 'followers' ,'favorite_xposts']);
+        $this->loadCount(['xposts', 'followings', 'followers' ,'favorites']);
     }
 
     /**********
@@ -139,11 +139,12 @@ class User extends Authenticatable
     }
 
     /******* お気に入りに必要な機能   ********/
-    
-     /**
-     多対多リレーションメソッドの定義
+    /**
+     * このユーザが所有するお気に入り。（ Favoriteモデルとの関係を定義）
+     * $user が お気に入りしている投稿を取得
+     * $user->userFavorites
      */
-    public function favorite_xposts() {
+    public function favorites() {
         return $this->belongsToMany(Xpost::class, 'favorites', 'user_id', 'xpost_id')->withTimestamps();
     }
     
@@ -161,7 +162,7 @@ class User extends Authenticatable
         if ($exist) {
             return false;
         } else {
-            $this->favorite_xposts()->attach($xpostId);
+            $this->favorites()->attach($xpostId);
             return true;
         }
     }
@@ -178,7 +179,7 @@ class User extends Authenticatable
         //$its_me = $this->id == $usersId;
         
         if ($exist) {
-            $this->favorite_xposts()->detach($xpostId);
+            $this->favorites()->detach($xpostId);
             return true;
         } else {
             return false;
@@ -193,6 +194,6 @@ class User extends Authenticatable
      */
     public function is_favorite($xpostId)
     {
-        return $this->favorite_xposts()->where('xpost_id', $xpostId)->exists();
+        return $this->favorites()->where('xpost_id', $xpostId)->exists();
     }
 }

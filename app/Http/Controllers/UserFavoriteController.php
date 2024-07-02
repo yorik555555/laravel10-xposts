@@ -14,10 +14,10 @@ class UserFavoriteController extends Controller
      */
     public function store($xpostId) {
         // 認証済みユーザ（閲覧者）のお気に入りになければ
-        //favorite_xposts() ...UserモデルbelongsToMany
+        //favorites() ...UserモデルbelongsToMany
         $user = \Auth::user();
         if (!$user->is_favorite($xpostId)) {
-            $user->favorite_xposts()->attach($xpostId);
+            $user->favorites()->attach($xpostId);
         }
         // 前のURLへリダイレクトさせる
         return back();
@@ -33,7 +33,7 @@ class UserFavoriteController extends Controller
         // 認証済みユーザ（閲覧者）が
         $user = \Auth::user();
         if ($user->is_favorite($xpostId)) {
-            $user->favorite_xposts()->detach($xpostId);
+            $user->favorites()->detach($xpostId);
         }
         // 前のURLへリダイレクトさせる
         return back();

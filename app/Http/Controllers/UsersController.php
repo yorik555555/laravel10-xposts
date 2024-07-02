@@ -100,15 +100,15 @@ class UsersController extends Controller
 
         // userモデルからfavoritesの件数をロード
         $user->loadRelationshipCounts();
-        //これがnavtab.blade.phpの{{ $user->favorite_xposts_count }}にいく
+        //これがnavtab.blade.phpの{{ $user->favorites_count }}にいく
         /*
         UsersController@favorites アクションで呼び出した 
         loadRelationshipCounts メソッドの中で、
-        リレーション favorite_xposts の件数をロードしたことより可能
+        リレーション favorites の件数をロードしたことより可能
         */
 
         // ユーザのお気に入り一覧を取得
-        $favorites = $user->favorite_xposts()->paginate(10);
+        $favorites = $user->favorites()->orderBy('created_at', 'desc')->paginate(10);
        
 
         // お気に入り一覧ビューでそれらを表示

@@ -18,7 +18,9 @@ use App\Http\Controllers\UserFavoriteController;
 |
 */
 
-Route::get('/', [XpostsController::class, 'index']);
+//Route::get('/', [XpostsController::class, 'index']);
+
+Route::match(['get', 'head'], '/', [XpostsController::class, 'index']);
 
 Route::get('/dashboard', [XpostsController::class, 'index'])->middleware(['auth'])->name('dashboard');
 

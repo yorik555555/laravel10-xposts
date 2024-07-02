@@ -5,6 +5,15 @@
     <div class="prose mx-auto text-center">
         <h2>Log in</h2>
     </div>
+    <div>
+        <div class="mx-auto mt-4 col-md-2">
+            <P class="text-danger">
+            【動作確認用アカウント】<br>
+                Email:  test@test.com <br>
+                Password:  testtest
+            </P>
+        </div>
+    </div>
 
     <div class="flex justify-center">
         <form method="POST" action="{{ route('login') }}" class="w-1/2">

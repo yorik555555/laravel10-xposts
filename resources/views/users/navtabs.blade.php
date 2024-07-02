@@ -19,7 +19,7 @@
         {{-- お気に入り一覧タブ --}}
         <a href="{{ route('favorites', $user->id) }}" class="tab text-primary text-decoration-none text-lg tab-lifted grow {{ Request::routeIs(' favorites') ? 'tab-active' : '' }}">
             Favorites
-            <span class="ml-1 badge bg-primary text-wrap text-decoration-none" style="height: 1.5rem;text-decoration:none;">{{ $user->favorite_xposts_count }}</span>
+            <span class="ml-1 badge bg-primary text-wrap text-decoration-none" style="height: 1.5rem;text-decoration:none;">{{ $user->favorites_count }}</span>
         </a>
     @endif
 </div>
